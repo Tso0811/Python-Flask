@@ -22,10 +22,19 @@ def index():
         return("你好")
     else:
         return("Hello")
-    return "Flask"
-
-
- 
+#建立路徑/getsum的處理函式
+#利用要求字串 (Query String) 提供彈性:/getsum?min=最小數&max=最大數
+    
+@app.route("/getsum")
+def getSum():
+    minNumber=request.args.get("min",0)
+    maxNumber=request.args.get("max",100)
+    minNumber=int(minNumber)
+    maxNumber=int(maxNumber)
+    sum=0
+    for i in range(minNumber,maxNumber+1):
+        sum+=i
+    return("總合為:"+str(sum))
 
 app.run(port=8080)   #啟動網站伺服器預設為5000,可透過 port 參數指定埠號
 
